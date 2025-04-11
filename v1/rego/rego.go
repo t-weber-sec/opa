@@ -1668,7 +1668,6 @@ func (r *Rego) PrepareForEval(ctx context.Context, opts ...PrepareOption) (Prepa
 		return PreparedEvalQuery{}, err
 	}
 
-	fmt.Println("Prep for eval 1")
 	// If the caller wanted to do partial evaluation as part of preparation
 	// do it now and use the new Rego object.
 	if pCfg.doPartialEval {
@@ -1687,8 +1686,8 @@ func (r *Rego) PrepareForEval(ctx context.Context, opts ...PrepareOption) (Prepa
 		}
 		return pq, txnErr
 	}
-	fmt.Println("Prep for eval 2")
 
+	fmt.Printf("%#v\n", ctx)
 	err = r.prepare(ctx, evalQueryType, []extraStage{
 		{
 			after: "ResolveRefs",
@@ -1754,7 +1753,6 @@ func (r *Rego) PrepareForEval(ctx context.Context, opts ...PrepareOption) (Prepa
 			if err != nil {
 				return PreparedEvalQuery{}, err
 			}
-			fmt.Println("Prep for eval 4")
 			// always add the builtins provided via rego.FunctionN options
 			opts = append(opts, WithBuiltinFuncs(r.builtinFuncs))
 			r.targetPrepState, err = tgt.PrepareForEval(ctx, pol, opts...)
@@ -1763,13 +1761,11 @@ func (r *Rego) PrepareForEval(ctx context.Context, opts ...PrepareOption) (Prepa
 			}
 		}
 	}
-	fmt.Println("Prep for eval 5")
 
 	txnErr := txnClose(ctx, err) // Always call closer
 	if txnErr != nil {
 		return PreparedEvalQuery{}, txnErr
 	}
-	fmt.Println("Prep for eval 6")
 
 	return PreparedEvalQuery{preparedQuery{r, pCfg}}, err
 }
