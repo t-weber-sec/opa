@@ -312,7 +312,7 @@ func (p *Parser) presentParser() (*Parser, map[string]tokens.Token) {
 // parsing will be accumulated and returned as a list of Errors.
 func (p *Parser) Parse() ([]Statement, []*Comment, Errors) {
 
-	fmt.Println("\nthis is where shit goes wrong")
+	fmt.Println("\nthis is where shit is parsed")
 	fmt.Println("Input: ", p.r)
 	if p.po.Capabilities == nil {
 		p.po.Capabilities = CapabilitiesForThisVersion(CapabilitiesRegoVersion(p.po.RegoVersion))
