@@ -1757,6 +1757,8 @@ func (s *Server) v1DataPost(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
+		fmt.Println("Query: ", pqID)
+
 		pq, err := rego.PrepareForEval(ctx)
 		fmt.Println("Err?", err)
 		if err != nil {
@@ -1764,8 +1766,6 @@ func (s *Server) v1DataPost(w http.ResponseWriter, r *http.Request) {
 			writer.ErrorAuto(w, err)
 			return
 		}
-
-		fmt.Println("Query: ", pqID)
 
 		preparedQuery = &pq
 		s.preparedEvalQueries.Insert(pqID, preparedQuery)
