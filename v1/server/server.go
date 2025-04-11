@@ -1757,6 +1757,9 @@ func (s *Server) v1DataPost(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
+		fmt.Println("GoInput: ", goInput)
+		fmt.Println("Input: ", input)
+		fmt.Println("Path: ", urlPath)
 		fmt.Println("Query: ", pqID)
 
 		pq, err := rego.PrepareForEval(ctx)
