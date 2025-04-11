@@ -443,7 +443,7 @@ func (p *Parser) Parse() ([]Statement, []*Comment, Errors) {
 	// next type of statement. If a statement can be parsed, continue from that
 	// point trying to parse packages, imports, etc. in the same order.
 	for p.s.tok != tokens.EOF {
-
+		fmt.Println(p.s.tok)
 		s := p.save()
 
 		if pkg := p.parsePackage(); pkg != nil {
