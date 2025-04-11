@@ -1818,7 +1818,6 @@ func (r *Rego) prepare(ctx context.Context, qType queryType, extras []extraStage
 	if err != nil {
 		return err
 	}
-	fmt.Printf("parsed Input:  %#v\n", r.parsedInput)
 
 	err = r.loadFiles(ctx, r.txn, r.metrics)
 	if err != nil {
@@ -1847,6 +1846,13 @@ func (r *Rego) prepare(ctx context.Context, qType queryType, extras []extraStage
 		return err
 	}
 	fmt.Println("prepare 6")
+
+	fmt.Printf("parsed input:  %#v\n", r.parsedInput)
+	fmt.Printf("parsed imports:  %#v\n", r.parsedImports)
+	fmt.Printf("parsed modules:  %#v\n", r.parsedModules)
+	fmt.Printf("parsed package:  %#v\n", r.parsedPackage)
+	fmt.Printf("parsed query:  %#v\n", r.parsedQuery)
+	fmt.Printf("parsed unknowns:  %#v\n", r.parsedUnknowns)
 
 	queryImports := []*ast.Import{}
 	for _, imp := range imports {
