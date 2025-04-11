@@ -354,8 +354,6 @@ func (p *Parser) Parse() ([]Statement, []*Comment, Errors) {
 			}
 		}
 
-		fmt.Printf("Allowed future keywords: %#v\n", allowedFutureKeywords)
-
 		// Check that explicitly requested future keywords are known.
 		for _, kw := range p.po.FutureKeywords {
 			if _, ok := allowedFutureKeywords[kw]; !ok {
@@ -390,6 +388,8 @@ func (p *Parser) Parse() ([]Statement, []*Comment, Errors) {
 			}
 		}
 	}
+
+	fmt.Printf("Allowed future keywords: %#v\n", allowedFutureKeywords)
 
 	var err error
 	p.s.s, err = scanner.New(p.r)
