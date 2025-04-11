@@ -1858,6 +1858,8 @@ func (r *Rego) prepare(ctx context.Context, qType queryType, extras []extraStage
 	}
 
 	r.parsedQuery, err = r.parseQuery(queryImports, r.metrics)
+	fmt.Printf("parsed query: %#\n", r.parsedQuery)
+	fmt.Println("Err?: ", err)
 	if err != nil {
 		return err
 	}
@@ -2016,7 +2018,6 @@ func (r *Rego) parseQuery(queryImports []*ast.Import, m metrics.Metrics) (ast.Bo
 	if r.parsedQuery != nil {
 		return r.parsedQuery, nil
 	}
-	fmt.Println("parse 1")
 
 	m.Timer(metrics.RegoQueryParse).Start()
 	defer m.Timer(metrics.RegoQueryParse).Stop()
@@ -2025,14 +2026,12 @@ func (r *Rego) parseQuery(queryImports []*ast.Import, m metrics.Metrics) (ast.Bo
 	if err != nil {
 		return nil, err
 	}
-	fmt.Println("parse 2")
 
 	popts.RegoVersion = r.regoVersion
 	popts, err = parserOptionsFromRegoVersionImport(queryImports, popts)
 	if err != nil {
 		return nil, err
 	}
-	fmt.Println("parse 3")
 
 	popts.SkipRules = true
 	return ast.ParseBodyWithOpts(r.query, popts)
