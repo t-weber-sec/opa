@@ -321,7 +321,6 @@ func (p *Parser) Parse() ([]Statement, []*Comment, Errors) {
 	allowedFutureKeywords := map[string]tokens.Token{}
 
 	if p.po.EffectiveRegoVersion() == RegoV1 {
-		fmt.Println("RegoV1 version")
 		if !p.po.Capabilities.ContainsFeature(FeatureRegoV1) {
 			return nil, nil, Errors{
 				&Error{
@@ -389,8 +388,6 @@ func (p *Parser) Parse() ([]Statement, []*Comment, Errors) {
 		}
 	}
 
-	fmt.Printf("Allowed future keywords: %#v\n", allowedFutureKeywords)
-
 	var err error
 	p.s.s, err = scanner.New(p.r)
 	if err != nil {
@@ -425,6 +422,8 @@ func (p *Parser) Parse() ([]Statement, []*Comment, Errors) {
 			selected[kw] = tok
 		}
 	}
+	fmt.Printf("Allowed keywords: %#v\n", selected)
+
 	p.s.s = p.s.s.WithKeywords(selected)
 
 	if p.po.EffectiveRegoVersion() == RegoV1 {
