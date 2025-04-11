@@ -1851,12 +1851,13 @@ func (r *Rego) prepare(ctx context.Context, qType queryType, extras []extraStage
 	}
 
 	r.parsedQuery, err = r.parseQuery(queryImports, r.metrics)
-	fmt.Println("ERR?", err)
 	if err != nil {
 		return err
 	}
 
 	err = r.compileAndCacheQuery(qType, r.parsedQuery, imports, r.metrics, extras)
+	fmt.Println("ERR?", err)
+
 	if err != nil {
 		return err
 	}
