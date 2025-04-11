@@ -1818,25 +1818,22 @@ func (r *Rego) prepare(ctx context.Context, qType queryType, extras []extraStage
 	if err != nil {
 		return err
 	}
-	fmt.Println("prepare 1")
+	fmt.Println("parsed Input:  %#v\n", r.parsedInput)
 
 	err = r.loadFiles(ctx, r.txn, r.metrics)
 	if err != nil {
 		return err
 	}
-	fmt.Println("prepare 2")
 
 	err = r.loadBundles(ctx, r.txn, r.metrics)
 	if err != nil {
 		return err
 	}
-	fmt.Println("prepare 3")
 
 	err = r.parseModules(ctx, r.txn, r.metrics)
 	if err != nil {
 		return err
 	}
-	fmt.Println("prepare 4")
 
 	// Compile the modules *before* the query, else functions
 	// defined in the module won't be found...
@@ -1844,7 +1841,6 @@ func (r *Rego) prepare(ctx context.Context, qType queryType, extras []extraStage
 	if err != nil {
 		return err
 	}
-	fmt.Println("prepare 5")
 
 	imports, err := r.prepareImports()
 	if err != nil {
