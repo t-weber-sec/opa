@@ -1664,11 +1664,11 @@ func (r *Rego) PrepareForEval(ctx context.Context, opts ...PrepareOption) (Prepa
 	var err error
 	var txnClose transactionCloser
 	r.txn, txnClose, err = r.getTxn(ctx)
-	fmt.Println("txn: ", r.txn)
 	if err != nil {
 		return PreparedEvalQuery{}, err
 	}
 
+	fmt.Println("Prep for eval 1")
 	// If the caller wanted to do partial evaluation as part of preparation
 	// do it now and use the new Rego object.
 	if pCfg.doPartialEval {
@@ -1687,6 +1687,7 @@ func (r *Rego) PrepareForEval(ctx context.Context, opts ...PrepareOption) (Prepa
 		}
 		return pq, txnErr
 	}
+	fmt.Println("Prep for eval 2")
 
 	err = r.prepare(ctx, evalQueryType, []extraStage{
 		{
@@ -1702,6 +1703,7 @@ func (r *Rego) PrepareForEval(ctx context.Context, opts ...PrepareOption) (Prepa
 		_ = txnClose(ctx, err) // Ignore error
 		return PreparedEvalQuery{}, err
 	}
+	fmt.Println("Prep for eval 3")
 
 	switch r.target {
 	case targetWasm: // TODO(sr): make wasm a target plugin, too
@@ -1752,6 +1754,7 @@ func (r *Rego) PrepareForEval(ctx context.Context, opts ...PrepareOption) (Prepa
 			if err != nil {
 				return PreparedEvalQuery{}, err
 			}
+			fmt.Println("Prep for eval 4")
 			// always add the builtins provided via rego.FunctionN options
 			opts = append(opts, WithBuiltinFuncs(r.builtinFuncs))
 			r.targetPrepState, err = tgt.PrepareForEval(ctx, pol, opts...)
@@ -1760,11 +1763,13 @@ func (r *Rego) PrepareForEval(ctx context.Context, opts ...PrepareOption) (Prepa
 			}
 		}
 	}
+	fmt.Println("Prep for eval 5")
 
 	txnErr := txnClose(ctx, err) // Always call closer
 	if txnErr != nil {
 		return PreparedEvalQuery{}, txnErr
 	}
+	fmt.Println("Prep for eval 6")
 
 	return PreparedEvalQuery{preparedQuery{r, pCfg}}, err
 }
