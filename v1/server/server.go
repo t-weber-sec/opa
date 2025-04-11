@@ -1735,13 +1735,13 @@ func (s *Server) v1DataPost(w http.ResponseWriter, r *http.Request) {
 	}
 	pqID += urlPath
 	preparedQuery, ok := s.getCachedPreparedEvalQuery(pqID, m)
-	fmt.Println("v1/data hit:")
 
 	if !ok {
 		opts := []func(*rego.Rego){
 			rego.Compiler(s.getCompiler()),
 			rego.Store(s.store),
 		}
+		fmt.Println("v1/data hit:")
 
 		// Set resolvers on the base Rego object to avoid having them get
 		// re-initialized, and to propagate them to the prepared query.
@@ -1751,12 +1751,16 @@ func (s *Server) v1DataPost(w http.ResponseWriter, r *http.Request) {
 			}
 		}
 
+		fmt.Println("v1/data hit2:")
+
 		rego, err := s.makeRego(ctx, strictBuiltinErrors, txn, input, urlPath, m, includeInstrumentation, buf, opts)
 		if err != nil {
 			_ = logger.Log(ctx, txn, urlPath, "", goInput, input, nil, ndbCache, err, m)
 			writer.ErrorAuto(w, err)
 			return
 		}
+
+		fmt.Println("v1/data hit3:")
 
 		pq, err := rego.PrepareForEval(ctx)
 		if err != nil {
