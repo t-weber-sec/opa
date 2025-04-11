@@ -505,8 +505,11 @@ func ParseBodyWithOpts(input string, popts ParserOptions) (Body, error) {
 		default:
 			return nil, fmt.Errorf("expected body but got %T", stmt)
 		}
+		fmt.Println("body 2")
+
 	}
 
+	fmt.Println("body 3")
 	return result, nil
 }
 

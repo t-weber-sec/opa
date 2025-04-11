@@ -1688,7 +1688,6 @@ func (r *Rego) PrepareForEval(ctx context.Context, opts ...PrepareOption) (Prepa
 	}
 
 	fmt.Printf("%#v\n", ctx)
-	fmt.Printf("%#v\n", evalQueryType)
 	err = r.prepare(ctx, evalQueryType, []extraStage{
 		{
 			after: "ResolveRefs",
