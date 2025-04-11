@@ -1687,7 +1687,6 @@ func (r *Rego) PrepareForEval(ctx context.Context, opts ...PrepareOption) (Prepa
 		return pq, txnErr
 	}
 
-	fmt.Printf("%#v\n", ctx)
 	err = r.prepare(ctx, evalQueryType, []extraStage{
 		{
 			after: "ResolveRefs",
@@ -1702,7 +1701,6 @@ func (r *Rego) PrepareForEval(ctx context.Context, opts ...PrepareOption) (Prepa
 		_ = txnClose(ctx, err) // Ignore error
 		return PreparedEvalQuery{}, err
 	}
-	fmt.Println("Prep for eval 3")
 
 	switch r.target {
 	case targetWasm: // TODO(sr): make wasm a target plugin, too
@@ -1844,10 +1842,6 @@ func (r *Rego) prepare(ctx context.Context, qType queryType, extras []extraStage
 	if err != nil {
 		return err
 	}
-	fmt.Println("prepare 6")
-
-	fmt.Printf("parsed input:  %#v\n", r.parsedInput)
-
 	queryImports := []*ast.Import{}
 	for _, imp := range imports {
 		path := imp.Path.Value.(ast.Ref)
@@ -1857,8 +1851,6 @@ func (r *Rego) prepare(ctx context.Context, qType queryType, extras []extraStage
 	}
 
 	r.parsedQuery, err = r.parseQuery(queryImports, r.metrics)
-	fmt.Printf("parsed query: %#v\n", r.parsedQuery)
-	fmt.Println("Err?: ", err)
 	if err != nil {
 		return err
 	}

@@ -1757,11 +1757,6 @@ func (s *Server) v1DataPost(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		fmt.Println("GoInput: ", goInput)
-		fmt.Println("Input: ", input)
-		fmt.Println("Path: ", urlPath)
-		fmt.Printf("Query: %#v\n", pqID)
-
 		pq, err := rego.PrepareForEval(ctx)
 		if err != nil {
 			_ = logger.Log(ctx, txn, urlPath, "", goInput, input, nil, ndbCache, err, m)
@@ -1771,11 +1766,7 @@ func (s *Server) v1DataPost(w http.ResponseWriter, r *http.Request) {
 
 		preparedQuery = &pq
 		s.preparedEvalQueries.Insert(pqID, preparedQuery)
-		fmt.Println("v1/data hit5:")
 	}
-
-	fmt.Println("input: ", input)
-	fmt.Println("prep query: ", preparedQuery)
 
 	evalOpts := []rego.EvalOption{
 		rego.EvalTransaction(txn),
