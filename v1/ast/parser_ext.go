@@ -642,8 +642,6 @@ func ParseStatementsWithOpts(filename, input string, popts ParserOptions) ([]Sta
 		return nil, nil, errs
 	}
 
-	fmt.Println("we good")
-
 	return stmts, comments, nil
 }
 
