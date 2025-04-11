@@ -1768,6 +1768,8 @@ func (s *Server) v1DataPost(w http.ResponseWriter, r *http.Request) {
 			writer.ErrorAuto(w, err)
 			return
 		}
+		fmt.Println("v1/data hit4:")
+
 		preparedQuery = &pq
 		s.preparedEvalQueries.Insert(pqID, preparedQuery)
 	}
