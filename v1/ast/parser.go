@@ -422,7 +422,6 @@ func (p *Parser) Parse() ([]Statement, []*Comment, Errors) {
 			selected[kw] = tok
 		}
 	}
-	fmt.Printf("Allowed keywords: %#v\n", selected)
 
 	p.s.s = p.s.s.WithKeywords(selected)
 
@@ -451,6 +450,7 @@ func (p *Parser) Parse() ([]Statement, []*Comment, Errors) {
 			stmts = append(stmts, pkg)
 			continue
 		} else if len(p.s.errors) > 0 {
+			fmt.Println("Err while parsePackage")
 			break
 		}
 
@@ -469,6 +469,8 @@ func (p *Parser) Parse() ([]Statement, []*Comment, Errors) {
 			stmts = append(stmts, imp)
 			continue
 		} else if len(p.s.errors) > 0 {
+			fmt.Println("Err while parseImports")
+
 			break
 		}
 
@@ -483,6 +485,8 @@ func (p *Parser) Parse() ([]Statement, []*Comment, Errors) {
 				}
 				continue
 			} else if len(p.s.errors) > 0 {
+				fmt.Println("Err while parseRules")
+
 				break
 			}
 
