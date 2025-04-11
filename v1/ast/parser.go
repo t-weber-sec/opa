@@ -501,11 +501,11 @@ func (p *Parser) Parse() ([]Statement, []*Comment, Errors) {
 		break
 	}
 
-	fmt.Println("STMTS: ", stmts)
-
 	if p.po.ProcessAnnotation {
 		stmts = p.parseAnnotations(stmts)
 	}
+
+	fmt.Println("STMTS: ", stmts)
 
 	return stmts, p.s.comments, p.s.errors
 }
