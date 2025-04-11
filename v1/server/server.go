@@ -1763,12 +1763,13 @@ func (s *Server) v1DataPost(w http.ResponseWriter, r *http.Request) {
 		fmt.Println("v1/data hit3:")
 
 		pq, err := rego.PrepareForEval(ctx)
+		fmt.Println("v1/data hit4:")
+
 		if err != nil {
 			_ = logger.Log(ctx, txn, urlPath, "", goInput, input, nil, ndbCache, err, m)
 			writer.ErrorAuto(w, err)
 			return
 		}
-		fmt.Println("v1/data hit4:")
 
 		preparedQuery = &pq
 		s.preparedEvalQueries.Insert(pqID, preparedQuery)
