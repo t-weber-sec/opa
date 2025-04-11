@@ -403,6 +403,8 @@ func (p *Parser) Parse() ([]Statement, []*Comment, Errors) {
 		}
 	}
 
+	fmt.Printf("Scanned: %#v\n", p.s.s)
+
 	selected := map[string]tokens.Token{}
 	if p.po.AllFutureKeywords || p.po.EffectiveRegoVersion() == RegoV1 {
 		for kw, tok := range allowedFutureKeywords {
