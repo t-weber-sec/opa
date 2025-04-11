@@ -1858,7 +1858,7 @@ func (r *Rego) prepare(ctx context.Context, qType queryType, extras []extraStage
 	}
 
 	r.parsedQuery, err = r.parseQuery(queryImports, r.metrics)
-	fmt.Printf("parsed query: %#\n", r.parsedQuery)
+	fmt.Printf("parsed query: %#v\n", r.parsedQuery)
 	fmt.Println("Err?: ", err)
 	if err != nil {
 		return err
