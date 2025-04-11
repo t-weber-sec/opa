@@ -1848,11 +1848,6 @@ func (r *Rego) prepare(ctx context.Context, qType queryType, extras []extraStage
 	fmt.Println("prepare 6")
 
 	fmt.Printf("parsed input:  %#v\n", r.parsedInput)
-	fmt.Printf("parsed imports:  %#v\n", r.parsedImports)
-	fmt.Printf("parsed modules:  %#v\n", r.parsedModules)
-	fmt.Printf("parsed package:  %#v\n", r.parsedPackage)
-	fmt.Printf("parsed query:  %#v\n", r.parsedQuery)
-	fmt.Printf("parsed unknowns:  %#v\n", r.parsedUnknowns)
 
 	queryImports := []*ast.Import{}
 	for _, imp := range imports {
