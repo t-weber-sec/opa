@@ -1735,6 +1735,8 @@ func (s *Server) v1DataPost(w http.ResponseWriter, r *http.Request) {
 	}
 	pqID += urlPath
 	preparedQuery, ok := s.getCachedPreparedEvalQuery(pqID, m)
+	fmt.Println("v1/data hit:")
+
 	if !ok {
 		opts := []func(*rego.Rego){
 			rego.Compiler(s.getCompiler()),
@@ -1766,7 +1768,6 @@ func (s *Server) v1DataPost(w http.ResponseWriter, r *http.Request) {
 		s.preparedEvalQueries.Insert(pqID, preparedQuery)
 	}
 
-	fmt.Println("v1/data hit:")
 	fmt.Println("input: ", input)
 	fmt.Println("prep query: ", preparedQuery)
 
