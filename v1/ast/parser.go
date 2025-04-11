@@ -312,7 +312,7 @@ func (p *Parser) presentParser() (*Parser, map[string]tokens.Token) {
 // parsing will be accumulated and returned as a list of Errors.
 func (p *Parser) Parse() ([]Statement, []*Comment, Errors) {
 
-	fmt.Println("this is where shit goes wrong")
+	fmt.Println("\nthis is where shit goes wrong")
 	fmt.Println("Input: ", p.r)
 	if p.po.Capabilities == nil {
 		p.po.Capabilities = CapabilitiesForThisVersion(CapabilitiesRegoVersion(p.po.RegoVersion))
@@ -321,6 +321,7 @@ func (p *Parser) Parse() ([]Statement, []*Comment, Errors) {
 	allowedFutureKeywords := map[string]tokens.Token{}
 
 	if p.po.EffectiveRegoVersion() == RegoV1 {
+		fmt.Println("RegoV1 version")
 		if !p.po.Capabilities.ContainsFeature(FeatureRegoV1) {
 			return nil, nil, Errors{
 				&Error{
