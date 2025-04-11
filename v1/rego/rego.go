@@ -1664,6 +1664,7 @@ func (r *Rego) PrepareForEval(ctx context.Context, opts ...PrepareOption) (Prepa
 	var err error
 	var txnClose transactionCloser
 	r.txn, txnClose, err = r.getTxn(ctx)
+	fmt.Println("txn: ", r.txn)
 	if err != nil {
 		return PreparedEvalQuery{}, err
 	}
