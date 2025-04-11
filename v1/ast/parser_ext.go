@@ -487,6 +487,9 @@ func ParseBody(input string) (Body, error) {
 // but respects whatever ParserOptions it's been given.
 func ParseBodyWithOpts(input string, popts ParserOptions) (Body, error) {
 
+	fmt.Println("Parsing body with opts: ")
+	fmt.Println("input: ", input)
+	fmt.Printf("opts: %#v\n", popts)
 	stmts, _, err := ParseStatementsWithOpts("", input, popts)
 	if err != nil {
 		return nil, err
@@ -505,11 +508,8 @@ func ParseBodyWithOpts(input string, popts ParserOptions) (Body, error) {
 		default:
 			return nil, fmt.Errorf("expected body but got %T", stmt)
 		}
-		fmt.Println("body 2")
-
 	}
 
-	fmt.Println("body 3")
 	return result, nil
 }
 
