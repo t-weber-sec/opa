@@ -494,6 +494,7 @@ func (p *Parser) Parse() ([]Statement, []*Comment, Errors) {
 		}
 
 		if body := p.parseQuery(true, tokens.EOF); body != nil {
+			fmt.Println("New stmts:", stmts, body)
 			stmts = append(stmts, body)
 			continue
 		}
