@@ -1855,9 +1855,13 @@ func (r *Rego) prepare(ctx context.Context, qType queryType, extras []extraStage
 		return err
 	}
 
+	fmt.Println("Compiling:")
+	fmt.Printf("qtype: %#v\n", qType)
+	fmt.Printf("query: %#v\n", r.parsedQuery)
+	fmt.Printf("imports: %#v\n", imports)
+	fmt.Printf("metrics: %#v\n", r.metrics)
+	fmt.Printf("extras: %#v\n", extras)
 	err = r.compileAndCacheQuery(qType, r.parsedQuery, imports, r.metrics, extras)
-	fmt.Println("ERR?", err)
-
 	if err != nil {
 		return err
 	}
