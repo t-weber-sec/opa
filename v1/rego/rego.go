@@ -1818,7 +1818,7 @@ func (r *Rego) prepare(ctx context.Context, qType queryType, extras []extraStage
 	if err != nil {
 		return err
 	}
-	fmt.Println("parsed Input:  %#v\n", r.parsedInput)
+	fmt.Printf("parsed Input:  %#v\n", r.parsedInput)
 
 	err = r.loadFiles(ctx, r.txn, r.metrics)
 	if err != nil {
