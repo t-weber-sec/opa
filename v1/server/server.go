@@ -1767,7 +1767,9 @@ func (s *Server) v1DataPost(w http.ResponseWriter, r *http.Request) {
 	}
 
 	fmt.Println("v1/data hit:")
-	fmt.Println(input)
+	fmt.Println("input: ", input)
+	fmt.Println("inter query cache: ", s.interQueryBuiltinCache)
+	fmt.Println("inter query value cache: ", s.interQueryBuiltinValueCache)
 
 	evalOpts := []rego.EvalOption{
 		rego.EvalTransaction(txn),
