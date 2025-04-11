@@ -337,6 +337,8 @@ func (p *Parser) Parse() ([]Statement, []*Comment, Errors) {
 			allowedFutureKeywords[k] = v
 		}
 
+		fmt.Printf("Allowed future keywords: %#v\n", allowedFutureKeywords)
+
 		for _, kw := range p.po.Capabilities.FutureKeywords {
 			if tok, ok := futureKeywords[kw]; ok {
 				allowedFutureKeywords[kw] = tok
