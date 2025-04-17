@@ -1735,6 +1735,8 @@ func (s *Server) v1DataPost(w http.ResponseWriter, r *http.Request) {
 		pqID += "strict-builtin-errors::"
 	}
 	pqID += urlPath
+	fmt.Println("AAAA PQID: ", pqID)
+
 	preparedQuery, ok := s.getCachedPreparedEvalQuery(pqID, m)
 
 	if !ok {
