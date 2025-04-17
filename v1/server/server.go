@@ -1516,7 +1516,7 @@ func (s *Server) v1DataGet(w http.ResponseWriter, r *http.Request) {
 		pqID += "strict-builtin-errors::"
 	}
 	pqID += urlPath
-	fmt.Printf("pqID: %s", pqID)
+	fmt.Printf("AAAA PQID: %s", pqID)
 	preparedQuery, ok := s.getCachedPreparedEvalQuery(pqID, m)
 	if !ok {
 		opts := []func(*rego.Rego){
