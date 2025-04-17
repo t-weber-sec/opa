@@ -1855,7 +1855,7 @@ func (r *Rego) prepare(ctx context.Context, qType queryType, extras []extraStage
 		return err
 	}
 
-	fmt.Println("Compiling:")
+	fmt.Println("Compilingggg:")
 	fmt.Printf("qtype: %#v\n", qType)
 	fmt.Printf("query: %#v\n", r.parsedQuery)
 	fmt.Printf("imports: %#v\n", imports)
